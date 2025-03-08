@@ -1,0 +1,82 @@
+.categories{
+    box-sizing: border-box;
+    margin: 0 auto 56px;
+    max-width: 1136px;
+    width: 100%;
+    padding: 0 16px;
+}
+.categories_title{
+    color: #000;
+    font-size: 32px;
+    margin-bottom: 24px;
+    margin-top: 0;
+}
+.content{
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+.category{
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    width: 30%;
+}
+.category_img_phones{
+    aspect-ratio: 1/1;
+    background-color: rgb(99, 100, 100);
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+.category_img_tablets{
+    aspect-ratio: 1/1;
+    background-color: rgb(130, 148, 148);
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+.category_img_accessories{
+    aspect-ratio: 1/1;
+    background-color: rgb(131, 44, 44);
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.img_phones{
+    height: 100%;
+    transform: translate(30%, 20%);
+}
+.img_tablets{
+    height: 100%;
+    transform: translate(15%, 12%);
+}
+.img_accessories{
+    height: 85%;
+    transform: translate(5%, 18%);
+}
+.category_title{
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+.category_info{
+    font-size: 14px;
+    color: #858282;
+}
+@media (max-width: 640px) {
+    .categories_title{
+        font-size: 22px;
+    }
+    .content{
+        flex-direction: column;
+        gap: 32px;
+    }
+    .category{
+        width: 100%;
+    }
+}
+@media (min-width:1200px) {
+    .categories{
+        padding: 0;
+        margin-bottom: 80px;
+    }
+    
+}

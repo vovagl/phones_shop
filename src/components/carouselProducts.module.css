@@ -1,0 +1,117 @@
+.product_card{
+    border: 1px solid #e2e6e9;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px;
+    min-width: 212px;
+    max-width: 287px;
+}
+.img_link{
+    display: flex;
+    text-align: center;
+}
+.img{
+    max-width: 50%;
+    margin: 0 auto 24px;
+    transition: transform 0.3s;
+}
+.img:hover{
+    transform: scale(1.1);
+}
+.title_link{
+    text-decoration: none;
+}
+.slider_title{
+    color: #000;
+    font-size: 22px;
+}
+.title{
+    color: #000;
+    font-size: 14px;
+ }
+ .price{
+     border-bottom: 1px solid #8a8b8b;
+     margin-bottom: 8px;
+     padding-bottom: 8px;
+ }
+ .price_span{
+     font-size: 22px;
+     margin-right: 10px;
+ }
+ .exprice_span{
+    color: #89939a;
+    font-size: 22px;
+    text-decoration: line-through;
+}
+.characteristic{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.characteristic_name{
+    color: #89939a;
+    font-size: 12px;
+}
+.characteristic_property{
+    color: #000;
+    font-size: 12px;
+}
+.buttons{
+    display: flex;
+    gap: 16px;
+}
+.add_cart{
+    background-color: #000;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+}
+.active_cart{
+    background-color: white;
+    color: green;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    border: 1px solid  green;
+    cursor: not-allowed;
+}
+.add_fav{
+    border: 1px solid #737474;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    position: relative;
+}
+.add_fav::after{
+    content:url(../../src/images/heart.svg);
+}
+.active_fav{
+    border: 1px solid green;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    position: relative;
+}
+
+.active_fav::after {
+    content:url(../../src/images/redHeart.png);
+}
+@media (min-width: 640px) {
+    .product_card{
+     min-width: 237px;
+    }
+    .slider_title{
+        font-size: 32px;
+       } 
+}
+@media (min-width:1200px) {
+    .product_card{
+        min-width: 272px;
+       }
+}

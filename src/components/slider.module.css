@@ -1,0 +1,93 @@
+.slider{
+    margin-bottom: 90px;
+}
+.container{
+   box-sizing: border-box;
+   display: flex;
+   gap: 16px;
+   height: 100%;
+   margin: 0 auto;
+   width: 100%; 
+   max-width: 1136px;
+   padding: 0 0 18px;
+   width: 100%;
+}
+.window{
+  overflow: hidden;  
+  width: 100%;
+  height: 450px;
+}
+.slider_item{
+    display: flex;
+    justify-content: center;
+    height: auto;
+    min-width: 100%;  
+}
+.all_pages{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 1040px;
+    transition: transform 0.5s;
+}
+.left{
+    border: 1px solid #e2e6e9;
+    cursor: pointer;
+    padding: 0 13px;
+}
+.left::after{
+    content: url(../../src/images/arrow_left.svg);
+}
+.right{
+    border: 1px solid #e2e6e9;
+    cursor: pointer;
+    padding: 0 13px;
+}
+.right::after{
+    content: url(../../src/images/arrow_left.svg);
+    display: block;
+    transform: rotate(180deg);
+}
+.indicators{
+    display: flex;
+    gap: 14px;
+    margin: 0 auto;
+    width: max-content;
+}
+.indicator{
+    background-color: #e2e6e9;
+    cursor: pointer;
+    padding: 2px 9px;
+}
+.indicator_active{
+    background-color: #9f9fa0;
+    cursor: pointer;
+    padding: 2px 9px;
+}
+@media (min-width: 640px) {
+   .container{
+    padding: 0 24px 18px;
+   } 
+}
+@media (max-width: 640px) {
+    .left{
+        display: none;
+    }
+    .right{
+        display: none;
+    }
+    
+    .window{
+        height: 250px;
+    }
+}
+@media (min-width: 1200px) {
+   .container{
+    padding: 0 0 18px;
+   } 
+}
+@media (min-width: 641px) and (max-width: 769px) {
+    .window{
+        height: 300px;
+    }
+}
