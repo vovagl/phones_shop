@@ -21,11 +21,11 @@ export default function Header() {
   const cartProduct = useSelector(selectCart);
   const favoriteProduct = useSelector(selectFavorite);
 
-  // useEffect(() => {
-  //   if (isMounted) {
-  //     sound();
-  //   }
-  // }, [isMounted, sound]);
+  useEffect(() => {
+    if (isMounted) {
+      sound();
+    }
+  }, [isMounted, sound]);
 
   let links = [
     { name: "HOME", a: "/" },

@@ -71,25 +71,20 @@ export default function CurrentProductPage() {
     }
   };
 
-  const goBack = (event) => {
-    event.preventDefault();
+  const goBack = () => {
     navigate(-1);
-    //setTimeout(() => {
-    window.scrollTo(0, 0);
-    //   top: 0,
-    //   behavior: "smooth",
-    // });
-    //}, 1);
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }, 1);
   };
   useEffect(() => {
     const obj = products?.find((obj) => location.pathname.includes(obj.id));
     if (obj) {
       dispatch(setCurrentProduct(obj));
     }
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   }, [location.pathname]);
 
   useEffect(() => {

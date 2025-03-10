@@ -33,7 +33,6 @@ export default function CarouselProducts({ product, isHotPrices }) {
     const current = JSON.stringify(currentProduct);
     localStorage.setItem("current", current);
   }, [currentProduct]);
-  console.log(JSON.parse(localStorage.getItem("current")));
 
   const onClickFavoriteProduct = (product) => {
     if (!favoriteProduct.find((el) => el.id === product.id)) {
@@ -45,6 +44,7 @@ export default function CarouselProducts({ product, isHotPrices }) {
   const onClickCartProduct = (product) => {
     dispatch(addCartProduct(product));
   };
+
   return (
     <div className={css.product_card}>
       <Link

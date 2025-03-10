@@ -57,7 +57,7 @@ export default function ProductsSlider({ products, title, isHotPrices }) {
           {products.map((product, i) => (
             <CarouselProducts
               product={product}
-              key={i}
+              key={product.id}
               isHotPrices={isHotPrices}
             />
           ))}

@@ -42,11 +42,7 @@ export const shopSlice=createSlice(
         state.currentLink=action.payload;
     },
        setCurrentProduct(state, action){
-        if(state.currentProduct === null){
         state.currentProduct = action.payload;
-        }else{state.currentProduct = null;
-        state.currentProduct = action.payload;
-        }
     },
     }
            }
