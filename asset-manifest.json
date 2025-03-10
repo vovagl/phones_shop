@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/vovagl/phones_shop.git/static/css/main.2aeea638.css",
+    "main.js": "/vovagl/phones_shop.git/static/js/main.19e45ecf.js",
+    "static/js/885.10e5ba92.chunk.js": "/vovagl/phones_shop.git/static/js/885.10e5ba92.chunk.js",
+    "static/js/453.3ef3b92b.chunk.js": "/vovagl/phones_shop.git/static/js/453.3ef3b92b.chunk.js",
+    "static/media/Nazareth - We Are Animals.mp3": "/vovagl/phones_shop.git/static/media/Nazareth - We Are Animals.7f15d254b01fe0621f51.mp3",
+    "static/media/category-tablets.png": "/vovagl/phones_shop.git/static/media/category-tablets.51782e18205a1ca01ce8.png",
+    "static/media/image.png": "/vovagl/phones_shop.git/static/media/image.657d3ab1df7b8bbe2811.png",
+    "static/media/category-accessories.png": "/vovagl/phones_shop.git/static/media/category-accessories.e47d6d6df68a6548e82b.png",
+    "static/media/okey.png": "/vovagl/phones_shop.git/static/media/okey.ed11b0abd5b94884154d.png",
+    "static/media/woman.jpg": "/vovagl/phones_shop.git/static/media/woman.4e04e97db1d19aa7c6bd.jpg",
+    "static/media/category-phone.jpg": "/vovagl/phones_shop.git/static/media/category-phone.98e859ee80c0167f6104.jpg",
+    "static/media/Shopping bag (Cart).svg": "/vovagl/phones_shop.git/static/media/Shopping bag (Cart).f9632dca8fdaed9bb696.svg",
+    "static/media/heart.svg": "/vovagl/phones_shop.git/static/media/heart.87fbe581c0493d3cf3f1.svg",
+    "index.html": "/vovagl/phones_shop.git/index.html",
+    "static/media/arrow_left.svg": "/vovagl/phones_shop.git/static/media/arrow_left.73d59763e2c1fcd1d068.svg",
+    "main.2aeea638.css.map": "/vovagl/phones_shop.git/static/css/main.2aeea638.css.map",
+    "main.19e45ecf.js.map": "/vovagl/phones_shop.git/static/js/main.19e45ecf.js.map",
+    "885.10e5ba92.chunk.js.map": "/vovagl/phones_shop.git/static/js/885.10e5ba92.chunk.js.map",
+    "453.3ef3b92b.chunk.js.map": "/vovagl/phones_shop.git/static/js/453.3ef3b92b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2aeea638.css",
+    "static/js/main.19e45ecf.js"
+  ]
+}
