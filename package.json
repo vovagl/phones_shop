@@ -2,6 +2,7 @@
   "name": "phones_shop",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vovagl.github.io/catalog/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",
     "@testing-library/dom": "^10.4.0",
