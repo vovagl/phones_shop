@@ -20,14 +20,14 @@ function App() {
       <div>
       <Header/>
       <Routes basename="/phones_shop"> 
-      <Route path= '/' element={<HomePage/>}/>
-      <Route path= '/phones' element={<CatalogPage products ={phones} title = {'Phones'}/>}/>  
-      <Route path='/tablets' element={<CatalogPage products={tablets} title = {'Tablets'}/>}/>
-      <Route path='/accessories' element={<CatalogPage products={accessories} title= {'Accessories'}/>}/>
-      <Route path='/:title/:id' element={<CurrentProductPage/>}/>
-      <Route path='/favorite' element={<FavoritePage />}/>
-      <Route path='/cart' element={<CartPage />}/>
-      <Route path='/*' element={<NotFoundPage />}/>
+      <Route path= {`${process.env.PUBLIC_URL}/`} element={<HomePage/>}/>
+      <Route path= {`${process.env.PUBLIC_URL}/phones`} element={<CatalogPage products ={phones} title = {'Phones'}/>}/>  
+      <Route path= {`${process.env.PUBLIC_URL}/tablets`} element={<CatalogPage products={tablets} title = {'Tablets'}/>}/>
+      <Route path= {`${process.env.PUBLIC_URL}/accessories`} element={<CatalogPage products={accessories} title= {'Accessories'}/>}/>
+      <Route path= {`${process.env.PUBLIC_URL}/:title/:id`} element={<CurrentProductPage/>}/>
+      <Route path= {`${process.env.PUBLIC_URL}/favorite`} element={<FavoritePage />}/>
+      <Route path= {`${process.env.PUBLIC_URL}/cart`} element={<CartPage />}/>
+      <Route path= {`${process.env.PUBLIC_URL}/*`} element={<NotFoundPage />}/>
       </Routes>
       </div>
       <Footer/>
