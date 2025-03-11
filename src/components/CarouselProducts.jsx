@@ -50,11 +50,11 @@ export default function CarouselProducts({ product, isHotPrices }) {
       <Link
         onClick={() => onClickCurrentProduct(product)}
         className={css.img_link}
-        to={`/${product.category}/${product.id}`}
+        to={`${process.env.PUBLIC_URL}/${product.category}/${product.id}`}
       >
         <img
           className={css.img}
-          src={"/" + product.images[0]}
+          src={`${process.env.PUBLIC_URL}/${product.images[0]}`}
           alt="product"
         ></img>
       </Link>
@@ -62,7 +62,7 @@ export default function CarouselProducts({ product, isHotPrices }) {
         <Link
           onClick={() => onClickCurrentProduct(product)}
           className={css.title_link}
-          to={`/${product.category}/${product.id}`}
+          to={`${process.env.PUBLIC_URL}/${product.category}/${product.id}`}
         >
           <span className={css.title}>{product.name}</span>
         </Link>

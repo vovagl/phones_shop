@@ -25,7 +25,7 @@ export default function NotFoundPage() {
         <strong> GitHub Pages</strong>.
       </p>
       <div className={css.home}>
-        <Link className={css.link} to="/">
+        <Link className={css.link} to={`${process.env.PUBLIC_URL}/`}>
           Home
         </Link>
       </div>

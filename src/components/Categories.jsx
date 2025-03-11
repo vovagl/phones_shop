@@ -33,11 +33,14 @@ export default function Categories() {
       <div className={css.content}>
         {products.map((obj, i) => (
           <div key={i} className={css.category}>
-            <Link onClick={() => onClickLink(i)} to={obj.a}>
+            <Link
+              onClick={() => onClickLink(i)}
+              to={`${process.env.PUBLIC_URL}${obj.a}`}
+            >
               <div className={css.category_img_phones}>
                 <img
                   className={css.img_phones}
-                  src={obj.src}
+                  src={`${process.env.PUBLIC_URL}${obj.src}`}
                   alt="img_product"
                 />
               </div>

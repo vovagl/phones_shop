@@ -75,7 +75,7 @@ export default function Header() {
               className={
                 currentLink === i ? css.header_link_active : css.header_link
               }
-              to={link.a}
+              to={`${process.env.PUBLIC_URL}${link.a}`}
             >
               {link.name}
             </Link>
@@ -86,7 +86,7 @@ export default function Header() {
         <Link
           onClick={() => dispatch(setCurrentLink(null))}
           className={css.header_favorites}
-          to="/favorite"
+          to={`${process.env.PUBLIC_URL}/favorite`}
         >
           {favoriteProduct.length > 0 && (
             <div className={css.quantity_div}>
@@ -99,7 +99,7 @@ export default function Header() {
         <Link
           onClick={() => dispatch(setCurrentLink(null))}
           className={css.header_cart}
-          to="/cart"
+          to={`${process.env.PUBLIC_URL}/cart`}
         >
           {cartProduct.length > 0 && (
             <div className={css.quantity_div}>
@@ -127,7 +127,7 @@ export default function Header() {
           {links.map((link, i) => (
             <Fragment key={i}>
               <Link
-                to={link.a}
+                to={`${process.env.PUBLIC_URL}${link.a}`}
                 className={currentLink === i ? css.link_active : css.link}
                 onClick={() => onClickLink(i)}
               >
@@ -139,7 +139,7 @@ export default function Header() {
             <Link
               onClick={onClickBottomLink}
               className={css.favorites}
-              to="/favorite"
+              to={`${process.env.PUBLIC_URL}/favorite`}
             >
               {favoriteProduct.length > 0 && (
                 <div className={css.quantity_div_menu}>
@@ -149,7 +149,11 @@ export default function Header() {
                 </div>
               )}
             </Link>
-            <Link onClick={onClickBottomLink} className={css.cart} to="/cart">
+            <Link
+              onClick={onClickBottomLink}
+              className={css.cart}
+              to={`${process.env.PUBLIC_URL}/cart`}
+            >
               {cartProduct.length > 0 && (
                 <div className={css.quantity_div_menu}>
                   <span className={css.quantity_span}>

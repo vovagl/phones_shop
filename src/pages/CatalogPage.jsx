@@ -195,7 +195,7 @@ export default function CatalogPage({ products, title }) {
     <>
       <div className={css.product_page}>
         <div className={css.link}>
-          <Link onClick={onClickGoHome} to="/">
+          <Link onClick={onClickGoHome} to={`${process.env.PUBLIC_URL}/`}>
             <img className={css.icon_home} src={home} alt="icon_home"></img>
           </Link>
           <img className={css.icon_right} src={arrow} alt="icon_right"></img>
@@ -260,7 +260,9 @@ export default function CatalogPage({ products, title }) {
             {currentPage.map((obj, i) => (
               <div key={i} className={css.card}>
                 <Link
-                  to={`/${title.toLowerCase()}/${obj.id}`}
+                  to={`${process.env.PUBLIC_URL}/${title.toLowerCase()}/${
+                    obj.id
+                  }`}
                   onClick={() => onClickCurrentProduct(obj)}
                   className={css.img_link}
                 >
@@ -274,7 +276,9 @@ export default function CatalogPage({ products, title }) {
                   <Link
                     onClick={() => onClickCurrentProduct(obj)}
                     className={css.title_link}
-                    to={`/${title.toLowerCase()}/${obj.id}`}
+                    to={`${process.env.PUBLIC_URL}/${title.toLowerCase()}/${
+                      obj.id
+                    }`}
                   >
                     <span className={css.title}>{obj.name}</span>
                   </Link>

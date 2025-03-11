@@ -131,14 +131,17 @@ export default function CurrentProductPage() {
   return (
     <div className={css.product_page}>
       <div className={css.path}>
-        <Link onClick={() => dispatch(setCurrentLink(0))} to="/">
+        <Link
+          onClick={() => dispatch(setCurrentLink(0))}
+          to={`${process.env.PUBLIC_URL}/`}
+        >
           <img className={css.icon_home} src={home} alt="icon_home" />
         </Link>
         <img className={css.icon_right} src={right} alt="icon_right" />
         <Link
           onClick={onClickGoPage}
           className={css.link}
-          to={`/${goPage.toLowerCase()}`}
+          to={`${process.env.PUBLIC_URL}/${goPage.toLowerCase()}`}
         >
           <span className={css.path_span}>{goPage}</span>
         </Link>
@@ -154,11 +157,15 @@ export default function CurrentProductPage() {
           <div className={css.small_images}>
             {currentProduct?.images?.map((img, i) => (
               <div
-                key={img}
+                key={i}
                 onClick={() => setCurrentImages(i)}
                 className={css.small_image}
               >
-                <img className={css.img} src={"/" + img} alt="product_image" />
+                <img
+                  className={css.img}
+                  src={`${process.env.PUBLIC_URL}/` + img}
+                  alt="product_image"
+                />
               </div>
             ))}
           </div>
@@ -166,7 +173,10 @@ export default function CurrentProductPage() {
           <div className={css.main_image}>
             <img
               className={css.main_img}
-              src={"/" + currentProduct?.images?.[currentImages]}
+              src={
+                `${process.env.PUBLIC_URL}/` +
+                currentProduct?.images?.[currentImages]
+              }
               alt="product_image"
             ></img>
           </div>

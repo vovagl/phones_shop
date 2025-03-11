@@ -28,21 +28,21 @@ export default function Footer() {
           <Link
             onClick={() => dispatch(setCurrentLink(null))}
             className={css.navigation_link}
-            to="/*"
+            to={`${process.env.PUBLIC_URL}/*`}
           >
             GITHUB
           </Link>
           <Link
             onClick={() => dispatch(setCurrentLink(null))}
             className={css.navigation_link}
-            to="/*"
+            to={`${process.env.PUBLIC_URL}/*`}
           >
             CONTACTS
           </Link>
           <Link
             onClick={() => dispatch(setCurrentLink(null))}
             className={css.navigation_link}
-            to="/*"
+            to={`${process.env.PUBLIC_URL}/*`}
           >
             RIGHTS
           </Link>

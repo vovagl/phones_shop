@@ -66,7 +66,7 @@ export default function CartPage() {
                   </button>
                   <img
                     className={css.item_img}
-                    src={el.images[0]}
+                    src={`${process.env.PUBLIC_URL}/${el.images[0]}`}
                     alt="product_image"
                   />
                   <span className={css.item_name}>{el.name}</span>

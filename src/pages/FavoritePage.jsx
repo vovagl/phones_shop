@@ -50,7 +50,7 @@ export default function FavoritePage() {
         <Link
           onClick={() => dispatch(setCurrentLink(0))}
           className={css.a}
-          to="/"
+          to={`${process.env.PUBLIC_URL}/`}
         >
           <img className={css.icon_home} src={home} alt="icon_home" />
         </Link>
@@ -65,14 +65,14 @@ export default function FavoritePage() {
           <div key={i} className={css.product}>
             <Link
               className={css.img_link}
-              to={`/${el.category}/${el.id}`}
+              to={`${process.env.PUBLIC_URL}/${el.category}/${el.id}`}
               onClick={() => onClickCurrentProduct(el)}
             >
               <img className={css.img} src={el.images[0]} alt="product_image" />
             </Link>
             <Link
               className={css.title_link}
-              to={`/${el.category}/${el.id}`}
+              to={`${process.env.PUBLIC_URL}/${el.category}/${el.id}`}
               onClick={() => onClickCurrentProduct(el)}
             >
               <span className={css.title}>{el.name}</span>
