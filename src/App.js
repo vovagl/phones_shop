@@ -19,9 +19,9 @@ function App() {
     <div className='App'>
       <div>
       <Header/>
-      <Routes> 
-      <Route path='/' element={<HomePage/>}/>
-      <Route path='/phones' element={<CatalogPage products ={phones} title = {'Phones'}/>}/>  
+      <Routes basename="/phones_shop"> 
+      <Route path= '/' element={<HomePage/>}/>
+      <Route path= '/phones' element={<CatalogPage products ={phones} title = {'Phones'}/>}/>  
       <Route path='/tablets' element={<CatalogPage products={tablets} title = {'Tablets'}/>}/>
       <Route path='/accessories' element={<CatalogPage products={accessories} title= {'Accessories'}/>}/>
       <Route path='/:title/:id' element={<CurrentProductPage/>}/>
