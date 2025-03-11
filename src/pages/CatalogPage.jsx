@@ -13,6 +13,7 @@ import {
   setCurrentLink,
 } from "../redux/slices/shopSlice";
 import { selectCart, selectFavorite } from "../redux/slices/shopSlice";
+//import CurrentProductPage from "./CurrentProductPage";???????
 
 export default function CatalogPage({ products, title }) {
   const isMounted = useRef(false);
@@ -55,9 +56,14 @@ export default function CatalogPage({ products, title }) {
   }, [location]);
 
   const onClickCurrentProduct = (obj) => {
+    console.log(obj);
+
     dispatch(setCurrentProduct(obj));
     dispatch(setCurrentLink(null));
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   let sortProducts;
@@ -120,12 +126,18 @@ export default function CatalogPage({ products, title }) {
 
   const onClickPaginationBtn = (i) => {
     setPage(i + 1);
-    window.scroll(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
   const onClickPrev = () => {
     if (page > 1) {
       setPage((cur) => cur - 1);
-      window.scroll(0, 0);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } else {
       setPage(1);
     }
@@ -133,7 +145,10 @@ export default function CatalogPage({ products, title }) {
   const onClickNext = () => {
     if (page < pageNumbers.length) {
       setPage((cur) => cur + 1);
-      window.scroll(0, 0);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } else {
       setPage(pageNumbers.length);
     }

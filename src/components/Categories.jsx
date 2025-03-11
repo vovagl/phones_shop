@@ -25,7 +25,10 @@ export default function Categories() {
 
   const onClickLink = (i) => {
     dispatch(setCurrentLink(i + 1));
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
   return (
     <div className={css.categories}>
@@ -40,7 +43,7 @@ export default function Categories() {
               <div className={css.category_img_phones}>
                 <img
                   className={css.img_phones}
-                  src={`${process.env.PUBLIC_URL}${obj.src}`}
+                  src={obj.src}
                   alt="img_product"
                 />
               </div>

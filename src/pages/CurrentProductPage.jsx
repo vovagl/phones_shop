@@ -70,6 +70,7 @@ export default function CurrentProductPage() {
       dispatch(setCurrentLink(3));
     }
   };
+  console.log(currentProduct); //???????
 
   const goBack = () => {
     navigate(-1);
@@ -108,7 +109,9 @@ export default function CurrentProductPage() {
           obj.namespaceId === currentProduct.namespaceId &&
           obj.capacity === currentProduct.capacityAvailable[currentCapacity]
       );
-      dispatch(setCurrentProduct(product));
+      if (product) {
+        dispatch(setCurrentProduct(product));
+      } //??????
     }
   }, [currentCapacity]);
 
@@ -124,7 +127,9 @@ export default function CurrentProductPage() {
           obj.namespaceId === currentProduct.namespaceId &&
           obj.color === currentProduct.colorsAvailable[currentColor]
       );
-      dispatch(setCurrentProduct(product));
+      if (product) {
+        dispatch(setCurrentProduct(product));
+      } //?????
     }
   }, [currentColor]);
 
