@@ -21,10 +21,11 @@ export default function HomePage() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname === `${process.env.PUBLIC_URL}/`) {
       dispatch(setCurrentLink(0));
     }
   }, [location]);
+
   return (
     <div className={css.home_page}>
       <h1 className={css.title}>Welcome to Nice Gadgets store!</h1>
