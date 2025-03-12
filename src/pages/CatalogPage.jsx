@@ -13,7 +13,6 @@ import {
   setCurrentLink,
 } from "../redux/slices/shopSlice";
 import { selectCart, selectFavorite } from "../redux/slices/shopSlice";
-//import CurrentProductPage from "./CurrentProductPage";???????
 
 export default function CatalogPage({ products, title }) {
   const isMounted = useRef(false);
@@ -44,20 +43,18 @@ export default function CatalogPage({ products, title }) {
   const characteristics = ["Screen", "Capacity", "RAM"];
 
   useEffect(() => {
-    if (location.pathname.includes("/ph")) {
+    if (location.pathname.includes(`${process.env.PUBLIC_URL}/ph`)) {
       dispatch(setCurrentLink(1));
     }
-    if (location.pathname.includes("/ta")) {
+    if (location.pathname.includes(`${process.env.PUBLIC_URL}/ta`)) {
       dispatch(setCurrentLink(2));
     }
-    if (location.pathname.includes("/ac")) {
+    if (location.pathname.includes(`${process.env.PUBLIC_URL}/ac`)) {
       dispatch(setCurrentLink(3));
     }
   }, [location]);
 
   const onClickCurrentProduct = (obj) => {
-    console.log(obj);
-
     dispatch(setCurrentProduct(obj));
     dispatch(setCurrentLink(null));
     window.scrollTo({

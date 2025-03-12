@@ -47,30 +47,29 @@ export default function CurrentProductPage() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname.includes("/phones")) {
+    if (location.pathname.includes(`${process.env.PUBLIC_URL}/ph`)) {
       setProducts(phones);
       setGoPage("Phones");
-    } else if (location.pathname.includes("/tablets")) {
+    } else if (location.pathname.includes(`${process.env.PUBLIC_URL}/ta`)) {
       setProducts(tablets);
       setGoPage("Tablets");
-    } else if (location.pathname.includes("/accessories")) {
+    } else if (location.pathname.includes(`${process.env.PUBLIC_URL}/ac`)) {
       setProducts(accessories);
       setGoPage("Accessories");
     }
   }, [location]);
 
   const onClickGoPage = () => {
-    if (goPage.toLowerCase().includes("ph")) {
+    if (goPage.toLowerCase().includes("/ph")) {
       dispatch(setCurrentLink(1));
     }
-    if (goPage.toLowerCase().includes("ta")) {
+    if (goPage.toLowerCase().includes("/ta")) {
       dispatch(setCurrentLink(2));
     }
-    if (goPage.toLowerCase().includes("ac")) {
+    if (goPage.toLowerCase().includes("/ac")) {
       dispatch(setCurrentLink(3));
     }
   };
-  console.log(currentProduct); //???????
 
   const goBack = () => {
     navigate(-1);
@@ -109,9 +108,7 @@ export default function CurrentProductPage() {
           obj.namespaceId === currentProduct.namespaceId &&
           obj.capacity === currentProduct.capacityAvailable[currentCapacity]
       );
-      if (product) {
-        dispatch(setCurrentProduct(product));
-      } //??????
+      dispatch(setCurrentProduct(product));
     }
   }, [currentCapacity]);
 
@@ -127,9 +124,7 @@ export default function CurrentProductPage() {
           obj.namespaceId === currentProduct.namespaceId &&
           obj.color === currentProduct.colorsAvailable[currentColor]
       );
-      if (product) {
-        dispatch(setCurrentProduct(product));
-      } //?????
+      dispatch(setCurrentProduct(product));
     }
   }, [currentColor]);
 
