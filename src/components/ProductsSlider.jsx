@@ -4,6 +4,7 @@ import CarouselProducts from "./CarouselProducts";
 
 export default function ProductsSlider({ products, title, isHotPrices }) {
   const [offset, setOffset] = useState(0);
+  const [touchX, setTouchX] = useState(null);
 
   let shift;
   if (window.innerWidth <= 640) {
@@ -30,6 +31,26 @@ export default function ProductsSlider({ products, title, isHotPrices }) {
     }
   };
 
+  const handleTouchStart = (event) => {
+    setTouchX(event.touches[0].clientX);
+  };
+  const handleTouchEnd = (event) => {
+    if (touchX === null) return;
+    const touchEndX = event.changedTouches[0].clientX;
+    const difference = touchX - touchEndX;
+    const swipeThreshold = 50;
+    if (Math.abs(difference) > swipeThreshold) {
+      if (difference > 0) {
+        if (offset < products.length * shift) {
+          setOffset((prev) => prev + shift);
+        }
+      } else {
+        if (offset > 0) {
+          setOffset((prev) => prev - shift);
+        }
+      }
+    }
+  };
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
@@ -48,6 +69,8 @@ export default function ProductsSlider({ products, title, isHotPrices }) {
 
       <div className={css.window}>
         <div
+          onTouchStart={(event) => handleTouchStart(event)}
+          onTouchEnd={(event) => handleTouchEnd(event)}
           className={css.container}
           style={{
             transform: `translateX(-${offset}px)`,
@@ -56,6 +79,7 @@ export default function ProductsSlider({ products, title, isHotPrices }) {
         >
           {products.map((product, i) => (
             <CarouselProducts
+              products={products}
               product={product}
               key={product.id}
               isHotPrices={isHotPrices}
