@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/phones_shop/static/css/main.8799ed6a.css",
-    "main.js": "/phones_shop/static/js/main.9b72e27d.js",
+    "main.js": "/phones_shop/static/js/main.4229dc9b.js",
     "static/js/885.10e5ba92.chunk.js": "/phones_shop/static/js/885.10e5ba92.chunk.js",
     "static/js/453.3ef3b92b.chunk.js": "/phones_shop/static/js/453.3ef3b92b.chunk.js",
     "static/media/Nazareth - We Are Animals.mp3": "/phones_shop/static/media/Nazareth - We Are Animals.7f15d254b01fe0621f51.mp3",
@@ -16,12 +16,12 @@
     "index.html": "/phones_shop/index.html",
     "static/media/arrow_left.svg": "/phones_shop/static/media/arrow_left.73d59763e2c1fcd1d068.svg",
     "main.8799ed6a.css.map": "/phones_shop/static/css/main.8799ed6a.css.map",
-    "main.9b72e27d.js.map": "/phones_shop/static/js/main.9b72e27d.js.map",
+    "main.4229dc9b.js.map": "/phones_shop/static/js/main.4229dc9b.js.map",
     "885.10e5ba92.chunk.js.map": "/phones_shop/static/js/885.10e5ba92.chunk.js.map",
     "453.3ef3b92b.chunk.js.map": "/phones_shop/static/js/453.3ef3b92b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8799ed6a.css",
-    "static/js/main.9b72e27d.js"
+    "static/js/main.4229dc9b.js"
   ]
 }
