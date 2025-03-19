@@ -11,21 +11,27 @@ import {
   removeProduct,
   setCurrentProduct,
   setCurrentLink,
-} from "../redux/slices/shopSlice";
-import { selectCart, selectFavorite } from "../redux/slices/shopSlice";
+} from "../redux/slices/shopSlice.ts";
+import { selectCart, selectFavorite } from "../redux/slices/shopSlice.ts";
+import { Product } from "./HomePage.tsx";
 
-export default function CatalogPage({ products, title }) {
+type CatalogPageProps={
+  products:Product[];
+  title:string;
+}
+
+const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
   const isMounted = useRef(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
   const [isProductsPage, setIsProductsPage] = useState(false);
-  const [selectedItemsPage, setSelectedItemsPage] = useState(
-    JSON.parse(localStorage.getItem("itemsPage"))
-      ? JSON.parse(localStorage.getItem("itemsPage"))
+  const [selectedItemsPage, setSelectedItemsPage] = useState<number>(
+    JSON.parse(localStorage.getItem("itemsPage")?? "0")
+      ? JSON.parse(localStorage.getItem("itemsPage")?? "0")
       : 0
   );
-  const [selectedSort, setSelectedSort] = useState(
-    JSON.parse(localStorage.getItem("sort"))
-      ? JSON.parse(localStorage.getItem("sort"))
+  const [selectedSort, setSelectedSort] = useState<number>(
+    JSON.parse(localStorage.getItem("sort")?? "0")
+      ? JSON.parse(localStorage.getItem("sort")?? "0")
       : 0
   );
   const dispatch = useDispatch();
@@ -33,9 +39,9 @@ export default function CatalogPage({ products, title }) {
   const [productsOnPage, setProductsOnPage] = useState(products.length);
   const favoriteProduct = useSelector(selectFavorite);
   const cartProducts = useSelector(selectCart);
-  const sortRef = useRef();
-  const itemsPageRef = useRef();
-  const location = useLocation();
+  const sortRef = useRef<HTMLDivElement>(null);
+  const itemsPageRef = useRef<HTMLDivElement>(null);
+  const location= useLocation();
   const sort = ["Newest", "Alphabeticaly", "Cheapest"];
   const sortName = sort[selectedSort];
   const itemsPage = ["All", "16", "24", "32"];
@@ -54,7 +60,7 @@ export default function CatalogPage({ products, title }) {
     }
   }, [location]);
 
-  const onClickCurrentProduct = (obj) => {
+  const onClickCurrentProduct = (obj:Product) => {
     dispatch(setCurrentProduct(obj));
     dispatch(setCurrentLink(null));
     window.scrollTo({
@@ -63,7 +69,7 @@ export default function CatalogPage({ products, title }) {
     });
   };
 
-  let sortProducts;
+  let sortProducts:Product[]=[];
   switch (sortName) {
     case "Newest":
       sortProducts = [...products].sort((a, b) =>
@@ -116,12 +122,12 @@ export default function CatalogPage({ products, title }) {
   const lastCatalogIndex = page * productsOnPage;
   const firstCatalogIndex = lastCatalogIndex - productsOnPage;
   let currentPage = sortProducts.slice(firstCatalogIndex, lastCatalogIndex);
-  const pageNumbers = [];
+  const pageNumbers:number[] = [];
   for (let i = 1; i <= Math.ceil(sortProducts.length / productsOnPage); i++) {
     pageNumbers.push(i);
   }
 
-  const onClickPaginationBtn = (i) => {
+  const onClickPaginationBtn = (i:number) => {
     setPage(i + 1);
     window.scrollTo({
       top: 0,
@@ -151,13 +157,13 @@ export default function CatalogPage({ products, title }) {
     }
   };
 
-  const onSelectSort = (i) => {
+  const onSelectSort = (i:number) => {
     setSelectedSort(i);
     setIsOpenSort(false);
     setPage(1);
   };
 
-  const onSelectItemsPage = (i) => {
+  const onSelectItemsPage = (i:number) => {
     setSelectedItemsPage(i);
     setIsProductsPage(false);
     setPage(1);
@@ -167,8 +173,8 @@ export default function CatalogPage({ products, title }) {
   };
 
   useEffect(() => {
-    const onClickOutsideSort = (e) => {
-      if (!sortRef.current.contains(e.target)) {
+    const onClickOutsideSort = (e:MouseEvent) => {
+      if ( !sortRef.current?.contains(e.target as Node)) {
         setIsOpenSort(() => false);
       }
     };
@@ -179,8 +185,8 @@ export default function CatalogPage({ products, title }) {
     };
   }, []);
   useEffect(() => {
-    const onClickOutsideItemsPage = (e) => {
-      if (!itemsPageRef.current.contains(e.target)) {
+    const onClickOutsideItemsPage = (e:MouseEvent) => {
+      if (!itemsPageRef.current?.contains(e.target as Node)) {
         setIsProductsPage(() => false);
       }
     };
@@ -191,15 +197,15 @@ export default function CatalogPage({ products, title }) {
     };
   }, []);
 
-  const onClickFavoriteProduct = (phone) => {
-    if (!favoriteProduct.find((el) => el.id === phone.id)) {
-      dispatch(addProduct(phone, phone.id));
+  const onClickFavoriteProduct = (obj:Product) => {
+    if (!favoriteProduct.find((el) => el.id === obj.id)) {
+      dispatch(addProduct(obj));
     } else {
-      dispatch(removeProduct(phone, phone.id));
+      dispatch(removeProduct(obj));
     }
   };
 
-  const onClickCartProduct = (obj) => {
+  const onClickCartProduct = (obj:Product) => {
     dispatch(addCartProduct(obj));
   };
 
@@ -207,7 +213,7 @@ export default function CatalogPage({ products, title }) {
     <>
       <div className={css.product_page}>
         <div className={css.link}>
-          <Link onClick={onClickGoHome} to={`${process.env.PUBLIC_URL}/`}>
+          <Link onClick={onClickGoHome} to='/'>
             <img className={css.icon_home} src={home} alt="icon_home"></img>
           </Link>
           <img className={css.icon_right} src={arrow} alt="icon_right"></img>
@@ -272,9 +278,7 @@ export default function CatalogPage({ products, title }) {
             {currentPage.map((obj, i) => (
               <div key={i} className={css.card}>
                 <Link
-                  to={`${process.env.PUBLIC_URL}/${title.toLowerCase()}/${
-                    obj.id
-                  }`}
+                  to={`/${title.toLowerCase()}/${obj.id}`}
                   onClick={() => onClickCurrentProduct(obj)}
                   className={css.img_link}
                 >
@@ -288,9 +292,7 @@ export default function CatalogPage({ products, title }) {
                   <Link
                     onClick={() => onClickCurrentProduct(obj)}
                     className={css.title_link}
-                    to={`${process.env.PUBLIC_URL}/${title.toLowerCase()}/${
-                      obj.id
-                    }`}
+                    to={`/${title.toLowerCase()}/${obj.id}`}
                   >
                     <span className={css.title}>{obj.name}</span>
                   </Link>
@@ -310,7 +312,7 @@ export default function CatalogPage({ products, title }) {
                 </div>
                 <div className={css.buttons}>
                   <button
-                    disabled={cartProducts.find((el) => el.id === obj.id)}
+                    disabled={!!cartProducts.find((el) => el.id === obj.id)}
                     onClick={() => onClickCartProduct(obj)}
                     className={
                       cartProducts.find((el) => el.id === obj.id)
@@ -358,3 +360,4 @@ export default function CatalogPage({ products, title }) {
     </>
   );
 }
+export default CatalogPage;

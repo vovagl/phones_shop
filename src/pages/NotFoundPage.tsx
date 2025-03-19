@@ -1,8 +1,12 @@
 import React from "react";
 import css from "./notFoundPage.module.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentLink } from "../redux/slices/shopSlice.ts";
 
-export default function NotFoundPage() {
+const NotFoundPage:React.FC=()=> {
+   const dispatch = useDispatch();
+
   return (
     <div className={css.container}>
       <h1 className={css.status}>404</h1>
@@ -25,10 +29,11 @@ export default function NotFoundPage() {
         <strong> GitHub Pages</strong>.
       </p>
       <div className={css.home}>
-        <Link className={css.link} to={`${process.env.PUBLIC_URL}/`}>
+        <Link className={css.link} to='/' onClick={()=>dispatch(setCurrentLink(0))}>
           Home
         </Link>
       </div>
     </div>
   );
 }
+export default NotFoundPage;

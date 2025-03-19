@@ -1,4 +1,5 @@
 import css from "./favoritePage.module.css";
+import React from "react";
 import home from "../images/home.png";
 import arrow from "../images/arrow_right.png";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,11 +10,13 @@ import {
   setCurrentProduct,
   selectFavorite,
   selectCart,
-} from "../redux/slices/shopSlice";
+} from "../redux/slices/shopSlice.ts";
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { Product } from "./HomePage.tsx";
 
-export default function FavoritePage() {
+
+const FavoritePage:React.FC=()=>{
   const isMounted = useRef(false);
   const dispatch = useDispatch();
   const favoriteProduct = useSelector(selectFavorite);
@@ -27,18 +30,18 @@ export default function FavoritePage() {
     isMounted.current = true;
   }, [favoriteProduct]);
 
-  const onClickCurrentProduct = (el) => {
-    dispatch(setCurrentProduct(el, el.id));
+  const onClickCurrentProduct = (el:Product) => {
+    dispatch(setCurrentProduct(el));
   };
 
-  const onClickFavoriteProduct = (el) => {
+  const onClickFavoriteProduct = (el:Product) => {
     if (favoriteProduct.find((item) => item.id === el.id)) {
-      dispatch(removeProduct(el, el.id));
+      dispatch(removeProduct(el));
     }
   };
-  const onClickCartProduct = (el) => {
+  const onClickCartProduct = (el:Product) => {
     if (!cartProduct.find((item) => item.id === el.id)) {
-      dispatch(addCartProduct(el, el.id));
+      dispatch(addCartProduct(el));
     }
   };
 
@@ -50,7 +53,7 @@ export default function FavoritePage() {
         <Link
           onClick={() => dispatch(setCurrentLink(0))}
           className={css.a}
-          to={`${process.env.PUBLIC_URL}/`}
+          to='/'
         >
           <img className={css.icon_home} src={home} alt="icon_home" />
         </Link>
@@ -65,7 +68,7 @@ export default function FavoritePage() {
           <div key={i} className={css.product}>
             <Link
               className={css.img_link}
-              to={`${process.env.PUBLIC_URL}/${el.category}/${el.id}`}
+              to={`/${el.category}/${el.id}`}
               onClick={() => onClickCurrentProduct(el)}
             >
               <img className={css.img} src={el.images[0]} alt="product_image" />
@@ -117,3 +120,4 @@ export default function FavoritePage() {
     </div>
   );
 }
+export default FavoritePage;

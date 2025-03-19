@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import css from "./carouselProducts.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,16 +11,22 @@ import {
   selectFavorite,
   selectCart,
   selectCurrentProduct,
-} from "../redux/slices/shopSlice";
+} from "../redux/slices/shopSlice.ts";
+import { Product } from "../pages/HomePage.tsx";
 
-export default function CarouselProducts({ product, isHotPrices }) {
+type CarouselProductsProps={
+  product:Product;
+  isHotPrices:boolean;
+}
+
+const CarouselProducts:React.FC<CarouselProductsProps>=({ product, isHotPrices })=> {
   const dispatch = useDispatch();
   const favoriteProduct = useSelector(selectFavorite);
   const currentProduct = useSelector(selectCurrentProduct);
   const cartProduct = useSelector(selectCart);
   const characteristics = ["Screen", "Capacity", "RAM"];
 
-  const onClickCurrentProduct = (product) => {
+  const onClickCurrentProduct = (product:Product) => {
     dispatch(setCurrentProduct(product));
     dispatch(setCurrentLink(null));
     window.scrollTo({
@@ -34,14 +40,15 @@ export default function CarouselProducts({ product, isHotPrices }) {
     localStorage.setItem("current", current);
   }, [currentProduct]);
 
-  const onClickFavoriteProduct = (product) => {
-    if (!favoriteProduct.find((el) => el.id === product.id)) {
-      dispatch(addProduct(product, product.id));
+  const onClickFavoriteProduct = (product:Product) => {
+    if (!favoriteProduct.find((el:Product) => el.id === product.id)) {
+      dispatch(addProduct(product));
     } else {
-      dispatch(removeProduct(product, product.id));
+      dispatch(removeProduct(product));
     }
   };
-  const onClickCartProduct = (product) => {
+
+  const onClickCartProduct = (product:Product) => {
     dispatch(addCartProduct(product));
   };
 
@@ -50,7 +57,7 @@ export default function CarouselProducts({ product, isHotPrices }) {
       <Link
         onClick={() => onClickCurrentProduct(product)}
         className={css.img_link}
-        to={`${process.env.PUBLIC_URL}/${product.category}/${product.id}`}
+        to={`/${product.category}/${product.id}`}
       >
         <img
           className={css.img}
@@ -62,7 +69,7 @@ export default function CarouselProducts({ product, isHotPrices }) {
         <Link
           onClick={() => onClickCurrentProduct(product)}
           className={css.title_link}
-          to={`${process.env.PUBLIC_URL}/${product.category}/${product.id}`}
+          to={`/${product.category}/${product.id}`}
         >
           <span className={css.title}>{product.name}</span>
         </Link>
@@ -85,7 +92,7 @@ export default function CarouselProducts({ product, isHotPrices }) {
       </div>
       <div className={css.buttons}>
         <button
-          disabled={cartProduct.find((el) => el.id === product.id)}
+          disabled={!!cartProduct.find((el) => el.id === product.id)}
           className={
             cartProduct.find((el) => el.id === product.id)
               ? css.active_cart
@@ -109,3 +116,4 @@ export default function CarouselProducts({ product, isHotPrices }) {
     </div>
   );
 }
+export default CarouselProducts;

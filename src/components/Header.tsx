@@ -8,11 +8,13 @@ import {
   selectFavorite,
   selectLink,
   setCurrentLink,
-} from "../redux/slices/shopSlice";
+} from "../redux/slices/shopSlice.ts";
 import useSound from "use-sound";
 import singl from "../Nazareth - We Are Animals.mp3";
+import { useLocation } from "react-router-dom";
 
-export default function Header() {
+const Header:React.FC=()=> { 
+  const location = useLocation();
   const dispatch = useDispatch();
   const currentLink = useSelector(selectLink);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -42,13 +44,13 @@ export default function Header() {
     }
   };
 
-  const onClickLink = (i) => {
+  const onClickLink = (i:number) => {
     setIsOpenMenu((cur) => !cur);
     dispatch(setCurrentLink(i));
     document.body.classList.remove("overflow-y-hidden");
   };
 
-  const onClickHeaderLink = (i) => {
+  const onClickHeaderLink = (i:number) => {
     dispatch(setCurrentLink(i));
   };
 
@@ -57,7 +59,18 @@ export default function Header() {
     setIsOpenMenu((cur) => !cur);
     document.body.classList.remove("overflow-y-hidden");
   };
-
+useEffect(() => {
+    if (location.pathname === '/') {
+      dispatch(setCurrentLink(0));
+    }if (location.pathname === '/phones') {
+      dispatch(setCurrentLink(1));
+    }if (location.pathname === '/tablets') {
+      dispatch(setCurrentLink(2));
+    }if (location.pathname === '/accessories') {
+      dispatch(setCurrentLink(3));
+    }
+  }, [location]);
+  
   return (
     <header className={css.header}>
       <div className={css.header_navigation}>
@@ -75,7 +88,7 @@ export default function Header() {
               className={
                 currentLink === i ? css.header_link_active : css.header_link
               }
-              to={`${process.env.PUBLIC_URL}${link.a}`}
+              to={`${link.a}`}
             >
               {link.name}
             </Link>
@@ -86,7 +99,7 @@ export default function Header() {
         <Link
           onClick={() => dispatch(setCurrentLink(null))}
           className={css.header_favorites}
-          to={`${process.env.PUBLIC_URL}/favorite`}
+          to='/favorite'
         >
           {favoriteProduct.length > 0 && (
             <div className={css.quantity_div}>
@@ -99,7 +112,7 @@ export default function Header() {
         <Link
           onClick={() => dispatch(setCurrentLink(null))}
           className={css.header_cart}
-          to={`${process.env.PUBLIC_URL}/cart`}
+          to='/cart'
         >
           {cartProduct.length > 0 && (
             <div className={css.quantity_div}>
@@ -127,7 +140,7 @@ export default function Header() {
           {links.map((link, i) => (
             <Fragment key={i}>
               <Link
-                to={`${process.env.PUBLIC_URL}${link.a}`}
+                to={`${link.a}`}
                 className={currentLink === i ? css.link_active : css.link}
                 onClick={() => onClickLink(i)}
               >
@@ -139,7 +152,7 @@ export default function Header() {
             <Link
               onClick={onClickBottomLink}
               className={css.favorites}
-              to={`${process.env.PUBLIC_URL}/favorite`}
+              to='/favorite'
             >
               {favoriteProduct.length > 0 && (
                 <div className={css.quantity_div_menu}>
@@ -152,7 +165,7 @@ export default function Header() {
             <Link
               onClick={onClickBottomLink}
               className={css.cart}
-              to={`${process.env.PUBLIC_URL}/cart`}
+              to='/cart'
             >
               {cartProduct.length > 0 && (
                 <div className={css.quantity_div_menu}>
@@ -168,3 +181,4 @@ export default function Header() {
     </header>
   );
 }
+export default Header;

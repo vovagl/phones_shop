@@ -6,10 +6,11 @@ import {
   addCartProduct,
   minusCartProduct,
   selectCart,
-} from "../redux/slices/shopSlice";
+} from "../redux/slices/shopSlice.ts";
 import { Link, useNavigate } from "react-router-dom";
+import { ProductWithCount } from "../redux/slices/shopSlice.ts";
 
-export default function CartPage() {
+const CartPage:React.FC=()=> {
   const isMounted = useRef(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
@@ -24,9 +25,9 @@ export default function CartPage() {
     isMounted.current = true;
   }, [cartProduct]);
 
-  const onClickCartProduct = (el) => {
+  const onClickCartProduct = (el:ProductWithCount) => {
     if (cartProduct.find((item) => item.id === el.id)) {
-      dispatch(removeCartProduct(el, el.id));
+      dispatch(removeCartProduct(el));
     }
   };
 
@@ -38,17 +39,17 @@ export default function CartPage() {
     );
   }, [cartProduct]);
 
-  const onClickPlus = (el) => {
+  const onClickPlus = (el:ProductWithCount) => {
     dispatch(addCartProduct(el));
   };
 
-  const onClickMinus = (el) => {
+  const onClickMinus = (el:ProductWithCount) => {
     dispatch(minusCartProduct(el));
   };
 
   return (
     <div className={css.cart_page}>
-      <Link onClick={() => navigate(-1)} className={css.back_btn}>
+      <Link to="#" onClick={() => navigate(-1)} className={css.back_btn}>
         Back
       </Link>
       <h2 className={css.page_title}>Cart</h2>
@@ -110,3 +111,4 @@ export default function CartPage() {
     </div>
   );
 }
+export default CartPage;

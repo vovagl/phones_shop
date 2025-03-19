@@ -3,9 +3,9 @@ import css from "./footer.module.css";
 import okey from "../images/okey.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCurrentLink } from "../redux/slices/shopSlice";
+import { setCurrentLink } from "../redux/slices/shopSlice.ts";
 
-export default function Footer() {
+const Footer:React.FC=()=> {
   const dispatch = useDispatch();
 
   const scroll = () => {
@@ -28,21 +28,21 @@ export default function Footer() {
           <Link
             onClick={() => dispatch(setCurrentLink(null))}
             className={css.navigation_link}
-            to={`${process.env.PUBLIC_URL}/*`}
+            to='/*'
           >
             GITHUB
           </Link>
           <Link
             onClick={() => dispatch(setCurrentLink(null))}
             className={css.navigation_link}
-            to={`${process.env.PUBLIC_URL}/*`}
+            to='/*'
           >
             CONTACTS
           </Link>
           <Link
             onClick={() => dispatch(setCurrentLink(null))}
             className={css.navigation_link}
-            to={`${process.env.PUBLIC_URL}/*`}
+            to='/*'
           >
             RIGHTS
           </Link>
@@ -55,3 +55,4 @@ export default function Footer() {
     </div>
   );
 }
+export default Footer;

@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
-import  shopReducer  from './slices/shopSlice';
+import  shopReducer  from './slices/shopSlice.ts';
 
 
 export const store = configureStore({
@@ -7,3 +7,4 @@ export const store = configureStore({
     },
 });
 
+export type RootState=ReturnType<typeof store.getState>

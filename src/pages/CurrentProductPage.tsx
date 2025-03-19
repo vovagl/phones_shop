@@ -6,7 +6,7 @@ import right from "../images/arrow_right.png";
 import phones from "../api/phones.json";
 import tablets from "../api/tablets.json";
 import accessories from "../api/accessories.json";
-import ProductsSlider from "../components/ProductsSlider";
+import ProductsSlider from "../components/ProductsSlider.tsx";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addProduct,
@@ -17,14 +17,15 @@ import {
   selectCurrentProduct,
   selectFavorite,
   selectCart,
-} from "../redux/slices/shopSlice";
+} from "../redux/slices/shopSlice.ts";
+import { Product } from "./HomePage.tsx";
 
-export default function CurrentProductPage() {
-  const [products, setProducts] = useState(null);
+const CurrentProductPage:React.FC=()=> {
+  const [products, setProducts] = useState<Product[]|null>(null);
   const [goPage, setGoPage] = useState("");
   const [currentImages, setCurrentImages] = useState(0);
-  const [currentColor, setCurrentColor] = useState(null);
-  const [currentCapacity, setCurrentCapacity] = useState(null);
+  const [currentColor, setCurrentColor] = useState<number|null>(null);
+  const [currentCapacity, setCurrentCapacity] = useState<number|null>(null);
   const dispatch = useDispatch();
   const currentProduct = useSelector(selectCurrentProduct);
   const favoriteProduct = useSelector(selectFavorite);
@@ -33,27 +34,27 @@ export default function CurrentProductPage() {
   const characteristics = ["Screen", "Resolution", "Processor", "RAM"];
   const specifications = ["Camera", "Zoom", "Cell"];
 
-  const onClickFavoriteProduct = (currentProduct) => {
+  const onClickFavoriteProduct = (currentProduct:Product) => {
     if (!favoriteProduct.find((el) => el.id === currentProduct.id)) {
-      dispatch(addProduct(currentProduct, currentProduct.id));
+      dispatch(addProduct(currentProduct));
     } else {
-      dispatch(removeProduct(currentProduct, currentProduct.id));
+      dispatch(removeProduct(currentProduct));
     }
   };
-  const onClickCartProduct = (currentProduct) => {
+  const onClickCartProduct = (currentProduct:Product) => {
     dispatch(addCartProduct(currentProduct));
   };
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname.includes(`${process.env.PUBLIC_URL}/ph`)) {
+    if (location.pathname.includes('/ph')) {
       setProducts(phones);
       setGoPage("Phones");
-    } else if (location.pathname.includes(`${process.env.PUBLIC_URL}/ta`)) {
+    } else if (location.pathname.includes('/ta')) {
       setProducts(tablets);
       setGoPage("Tablets");
-    } else if (location.pathname.includes(`${process.env.PUBLIC_URL}/ac`)) {
+    } else if (location.pathname.includes('/ac')) {
       setProducts(accessories);
       setGoPage("Accessories");
     }
@@ -96,7 +97,7 @@ export default function CurrentProductPage() {
     );
   }, [currentProduct]);
 
-  const onClickCurrentCapacity = (i) => {
+  const onClickCurrentCapacity = (i:number) => {
     setCurrentCapacity(i);
   };
 
@@ -108,11 +109,13 @@ export default function CurrentProductPage() {
           obj.namespaceId === currentProduct.namespaceId &&
           obj.capacity === currentProduct.capacityAvailable[currentCapacity]
       );
+      if (product !== undefined) {
       dispatch(setCurrentProduct(product));
+      }
     }
   }, [currentCapacity]);
 
-  function onClickCurrentColor(i) {
+  function onClickCurrentColor(i:number) {
     setCurrentColor((cur) => i);
   }
 
@@ -124,7 +127,9 @@ export default function CurrentProductPage() {
           obj.namespaceId === currentProduct.namespaceId &&
           obj.color === currentProduct.colorsAvailable[currentColor]
       );
+      if (product !== undefined) {
       dispatch(setCurrentProduct(product));
+      }
     }
   }, [currentColor]);
 
@@ -133,7 +138,7 @@ export default function CurrentProductPage() {
       <div className={css.path}>
         <Link
           onClick={() => dispatch(setCurrentLink(0))}
-          to={`${process.env.PUBLIC_URL}/`}
+          to='/'
         >
           <img className={css.icon_home} src={home} alt="icon_home" />
         </Link>
@@ -141,14 +146,14 @@ export default function CurrentProductPage() {
         <Link
           onClick={onClickGoPage}
           className={css.link}
-          to={`${process.env.PUBLIC_URL}/${goPage.toLowerCase()}`}
+          to={`/${goPage.toLowerCase()}`}
         >
           <span className={css.path_span}>{goPage}</span>
         </Link>
         <img className={css.icon_right} src={right} alt="icon_right" />
         <span className={css.path_span_id}>{currentProduct?.name}</span>
       </div>
-      <Link onClick={goBack} className={css.back_btn}>
+      <Link to="#" onClick={goBack} className={css.back_btn}>
         Back
       </Link>
       <span className={css.product_name}>{currentProduct?.name}</span>
@@ -227,7 +232,7 @@ export default function CurrentProductPage() {
             </div>
             <div className={css.buttons}>
               <button
-                disabled={cartProduct?.find(
+                disabled={!!cartProduct?.find(
                   (el) => el.id === currentProduct?.id
                 )}
                 onClick={() => onClickCartProduct(currentProduct)}
@@ -292,7 +297,7 @@ export default function CurrentProductPage() {
           <div className={css.specifications_info}>
             <span className={css.characteristics_name}>Built in memory</span>
             <span className={css.characteristics_value}>
-              {currentProduct?.capacityAvailable[currentCapacity]}
+              {currentProduct?.capacityAvailable[currentCapacity?? 'defaultKey']}
             </span>
           </div>
           {specifications.map((property, i) => (
@@ -321,3 +326,4 @@ export default function CurrentProductPage() {
     </div>
   );
 }
+export default CurrentProductPage;

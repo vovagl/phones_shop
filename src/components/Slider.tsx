@@ -4,7 +4,7 @@ import image from "../images/image.png";
 import image1 from "../images/images.jpg";
 import woman from "../images/woman.jpg";
 
-export default function Slider() {
+const Slider:React.FC=()=> {
   const [offset, setOffset] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -43,7 +43,7 @@ export default function Slider() {
     }
   };
 
-  const onClickIndicator = (id) => {
+  const onClickIndicator = (id:number) => {
     setCurrentImage((cur) => id);
     setOffset((cur) => id);
   };
@@ -85,3 +85,4 @@ export default function Slider() {
     </div>
   );
 }
+export default Slider;

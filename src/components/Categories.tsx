@@ -8,9 +8,9 @@ import phones from "../api/phones.json";
 import tablets from "../api/tablets.json";
 import accessories from "../api/accessories.json";
 import { useDispatch } from "react-redux";
-import { setCurrentLink } from "../redux/slices/shopSlice";
+import { setCurrentLink } from "../redux/slices/shopSlice.ts";
 
-export default function Categories() {
+const Categories:React.FC=() =>{
   const dispatch = useDispatch();
   const products = [
     { name: "Mobile phones", a: "/phones", data: phones, src: phone },
@@ -23,7 +23,7 @@ export default function Categories() {
     },
   ];
 
-  const onClickLink = (i) => {
+  const onClickLink = (i:number) => {
     dispatch(setCurrentLink(i + 1));
     window.scrollTo({
       top: 0,
@@ -38,7 +38,7 @@ export default function Categories() {
           <div key={i} className={css.category}>
             <Link
               onClick={() => onClickLink(i)}
-              to={`${process.env.PUBLIC_URL}${obj.a}`}
+              to={`${obj.a}`}
             >
               <div className={css.category_img_phones}>
                 <img
@@ -56,3 +56,4 @@ export default function Categories() {
     </div>
   );
 }
+export default Categories;

@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import css from "./productsSlider.module.css";
-import CarouselProducts from "./CarouselProducts";
+import CarouselProducts from "./CarouselProducts.tsx";
+import { Product } from "../pages/HomePage";
 
-export default function ProductsSlider({ products, title, isHotPrices }) {
+type ProductsSliderProps={
+products:Product[];
+title:string;
+isHotPrices:boolean;
+}
+const ProductsSlider:React.FC<ProductsSliderProps>=({ products, title, isHotPrices })=> {
   const [offset, setOffset] = useState(0);
-  const [touchX, setTouchX] = useState(null);
+  const [touchX, setTouchX] = useState<number|null>(null);
 
-  let shift;
+  let shift:number;
   if (window.innerWidth <= 640) {
     shift = 228;
   } else if (window.innerWidth <= 1200) {
@@ -31,14 +37,14 @@ export default function ProductsSlider({ products, title, isHotPrices }) {
     }
   };
 
-  const handleTouchStart = (event) => {
+  const handleTouchStart = (event:React.TouchEvent<HTMLElement>) => {
     setTouchX(event.touches[0].clientX);
   };
-  const handleTouchEnd = (event) => {
+  const handleTouchEnd = (event:React.TouchEvent<HTMLElement>) => {
     if (touchX === null) return;
     const touchEndX = event.changedTouches[0].clientX;
     const difference = touchX - touchEndX;
-    const swipeThreshold = 50;
+    const swipeThreshold:number = 50;
     if (Math.abs(difference) > swipeThreshold) {
       if (difference > 0) {
         if (offset < products.length * shift) {
@@ -74,12 +80,11 @@ export default function ProductsSlider({ products, title, isHotPrices }) {
           className={css.container}
           style={{
             transform: `translateX(-${offset}px)`,
-            paddingLeft: title === "You may also like this" ? 0 : null,
+            paddingLeft: title === "You may also like this" ? 0 : 'none',
           }}
         >
           {products.map((product, i) => (
             <CarouselProducts
-              products={products}
               product={product}
               key={product.id}
               isHotPrices={isHotPrices}
@@ -90,3 +95,4 @@ export default function ProductsSlider({ products, title, isHotPrices }) {
     </div>
   );
 }
+export default ProductsSlider
