@@ -15,11 +15,9 @@ import NotFoundPage from './pages/NotFoundPage.tsx';
 
 const App:React.FC=() =>{  
   return (
-  // <BrowserRouter basename="/phones_shop">
     <div className='App'>
       <div>
       <Header/>
-       {/* basename="/phones_shop"> */}
       <Routes> 
       <Route path= '/' element={<HomePage/>}/>
       <Route path= '/phones' element={<CatalogPage products={phones} title = {'Phones'}/>}/>  
@@ -33,8 +31,6 @@ const App:React.FC=() =>{
       </div>
       <Footer/>
     </div>
-    // </BrowserRouter>
   );
 }
-//{`${process.env.PUBLIC_URL}/*`}
 export default App;

@@ -2,11 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "../../pages/HomePage";
 import { RootState } from "../store";
 
-// export type Product={
-// id:string;
-// count:number;
-// }
-//interface 
 export type ProductWithCount = Product &{
    count: number; 
  }
