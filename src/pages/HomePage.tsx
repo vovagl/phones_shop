@@ -49,7 +49,7 @@ const HomePage:React.FC=()=> {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === `${process.env.PUBLIC_URL}/`) {
+    if (location.pathname === '/') {
       dispatch(setCurrentLink(0));
     }
   }, [location]);

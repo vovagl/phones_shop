@@ -119,6 +119,16 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
     }
   }, [itemsPageName, sortProducts, productsOnPage]);
 
+  useEffect(() => {
+    const favorite = JSON.stringify(favoriteProduct);
+    localStorage.setItem("favorite", favorite);
+}, [favoriteProduct]);
+
+useEffect(() => {
+    const cart = JSON.stringify(cartProducts);
+    localStorage.setItem("cart", cart);
+}, [cartProducts]);
+
   const lastCatalogIndex = page * productsOnPage;
   const firstCatalogIndex = lastCatalogIndex - productsOnPage;
   let currentPage = sortProducts.slice(firstCatalogIndex, lastCatalogIndex);
@@ -134,6 +144,7 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
       behavior: "smooth",
     });
   };
+
   const onClickPrev = () => {
     if (page > 1) {
       setPage((cur) => cur - 1);
@@ -145,6 +156,7 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
       setPage(1);
     }
   };
+
   const onClickNext = () => {
     if (page < pageNumbers.length) {
       setPage((cur) => cur + 1);
@@ -168,6 +180,7 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
     setIsProductsPage(false);
     setPage(1);
   };
+
   const onClickGoHome = () => {
     dispatch(setCurrentLink(0));
   };
@@ -179,11 +192,11 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
       }
     };
     document.addEventListener("click", onClickOutsideSort);
-
     return () => {
       document.removeEventListener("click", onClickOutsideSort);
     };
   }, []);
+
   useEffect(() => {
     const onClickOutsideItemsPage = (e:MouseEvent) => {
       if (!itemsPageRef.current?.contains(e.target as Node)) {
@@ -191,7 +204,6 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
       }
     };
     document.addEventListener("click", onClickOutsideItemsPage);
-
     return () => {
       document.removeEventListener("click", onClickOutsideItemsPage);
     };
@@ -210,7 +222,6 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
   };
 
   return (
-    <>
       <div className={css.product_page}>
         <div className={css.link}>
           <Link onClick={onClickGoHome} to='/'>
@@ -220,7 +231,6 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
           <span className={css.link_span}>{title}</span>
         </div>
         <h1 className={css.page_title}>{title}</h1>
-
         <span className={css.items_amount}>{products.length} models</span>
         <div className={css.content}>
           <div className={css.parameters}>
@@ -247,7 +257,6 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
                 </div>
               )}
             </div>
-
             <div className={css.items_on_page}>
               <span className={css.items_on_page_span}>Items on page</span>
               <div
@@ -357,7 +366,6 @@ const CatalogPage:React.FC<CatalogPageProps>=({ products, title })=> {
           </div>
         )}
       </div>
-    </>
   );
 }
 export default CatalogPage;

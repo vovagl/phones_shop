@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./cartPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,33 +11,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { ProductWithCount } from "../redux/slices/shopSlice.ts";
 
 const CartPage:React.FC=()=> {
-  const isMounted = useRef(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
-  const cartProduct = useSelector(selectCart);
+  const cartProducts = useSelector(selectCart);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isMounted.current) {
-      const cart = JSON.stringify(cartProduct);
+      const cart = JSON.stringify(cartProducts);
       localStorage.setItem("cart", cart);
-    }
-    isMounted.current = true;
-  }, [cartProduct]);
+  }, [cartProducts]);
 
   const onClickCartProduct = (el:ProductWithCount) => {
-    if (cartProduct.find((item) => item.id === el.id)) {
+    if (cartProducts.find((item) => item.id === el.id)) {
       dispatch(removeCartProduct(el));
     }
   };
 
   useEffect(() => {
     setTotalPrice(
-      cartProduct.reduce((cur, item) => {
+      cartProducts.reduce((cur, item) => {
         return cur + item.priceDiscount * item.count;
       }, 0)
     );
-  }, [cartProduct]);
+  }, [cartProducts]);
 
   const onClickPlus = (el:ProductWithCount) => {
     dispatch(addCartProduct(el));
@@ -53,10 +49,10 @@ const CartPage:React.FC=()=> {
         Back
       </Link>
       <h2 className={css.page_title}>Cart</h2>
-      {cartProduct.length > 0 ? (
+      {cartProducts.length > 0 ? (
         <div className={css.cart_content}>
           <div className={css.cart_items}>
-            {cartProduct.map((el, i) => (
+            {cartProducts.map((el, i) => (
               <div key={i} className={css.cart_item}>
                 <div className={css.cart_item_main}>
                   <button
@@ -99,7 +95,7 @@ const CartPage:React.FC=()=> {
             <div className={css.total_price}>
               <span className={css.price_span}>$ {totalPrice}</span>
               <span className={css.total_quantity}>
-                Total for {cartProduct.length} items
+                Total for {cartProducts.length} items
               </span>
             </div>
             <button className={css.checkout_btn}>Checkout</button>

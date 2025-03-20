@@ -15,19 +15,14 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { Product } from "./HomePage.tsx";
 
-
 const FavoritePage:React.FC=()=>{
-  const isMounted = useRef(false);
   const dispatch = useDispatch();
   const favoriteProduct = useSelector(selectFavorite);
   const cartProduct = useSelector(selectCart);
 
   useEffect(() => {
-    if (isMounted.current) {
       const favorite = JSON.stringify(favoriteProduct);
       localStorage.setItem("favorite", favorite);
-    }
-    isMounted.current = true;
   }, [favoriteProduct]);
 
   const onClickCurrentProduct = (el:Product) => {
@@ -39,6 +34,7 @@ const FavoritePage:React.FC=()=>{
       dispatch(removeProduct(el));
     }
   };
+
   const onClickCartProduct = (el:Product) => {
     if (!cartProduct.find((item) => item.id === el.id)) {
       dispatch(addCartProduct(el));
@@ -62,7 +58,6 @@ const FavoritePage:React.FC=()=>{
       </div>
       <h1 className={css.page_title}>Favourites</h1>
       <span className={css.items_quantity}>{favoriteProduct.length} items</span>
-
       <div className={css.favorite_items}>
         {favoriteProduct.map((el, i) => (
           <div key={i} className={css.product}>

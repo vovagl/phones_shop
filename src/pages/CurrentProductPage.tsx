@@ -30,7 +30,8 @@ const CurrentProductPage:React.FC=()=> {
   const currentProduct = useSelector(selectCurrentProduct);
   const favoriteProduct = useSelector(selectFavorite);
   const cartProduct = useSelector(selectCart);
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const characteristics = ["Screen", "Resolution", "Processor", "RAM"];
   const specifications = ["Camera", "Zoom", "Cell"];
 
@@ -41,13 +42,15 @@ const CurrentProductPage:React.FC=()=> {
       dispatch(removeProduct(currentProduct));
     }
   };
+  
   const onClickCartProduct = (currentProduct:Product) => {
     dispatch(addCartProduct(currentProduct));
   };
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
+    if (location.pathname!=='/') {
+      dispatch(setCurrentLink(null))  
+    }
     if (location.pathname.includes('/ph')) {
       setProducts(phones);
       setGoPage("Phones");
@@ -133,6 +136,16 @@ const CurrentProductPage:React.FC=()=> {
     }
   }, [currentColor]);
 
+useEffect(() => {
+      const favorite = JSON.stringify(favoriteProduct);
+      localStorage.setItem("favorite", favorite);
+  }, [favoriteProduct]);
+
+useEffect(() => {
+      const cart = JSON.stringify(cartProduct);
+      localStorage.setItem("cart", cart);
+  }, [cartProduct]);
+
   return (
     <div className={css.product_page}>
       <div className={css.path}>
@@ -174,7 +187,6 @@ const CurrentProductPage:React.FC=()=> {
               </div>
             ))}
           </div>
-
           <div className={css.main_image}>
             <img
               className={css.main_img}
@@ -186,7 +198,6 @@ const CurrentProductPage:React.FC=()=> {
             ></img>
           </div>
         </div>
-
         <div className={css.product_settings}>
           <div className={css.color_settings}>
             <span className={css.color_title}>Available colors</span>

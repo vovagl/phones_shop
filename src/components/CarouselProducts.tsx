@@ -23,7 +23,7 @@ const CarouselProducts:React.FC<CarouselProductsProps>=({ product, isHotPrices }
   const dispatch = useDispatch();
   const favoriteProduct = useSelector(selectFavorite);
   const currentProduct = useSelector(selectCurrentProduct);
-  const cartProduct = useSelector(selectCart);
+  const cartProducts = useSelector(selectCart);
   const characteristics = ["Screen", "Capacity", "RAM"];
 
   const onClickCurrentProduct = (product:Product) => {
@@ -39,6 +39,16 @@ const CarouselProducts:React.FC<CarouselProductsProps>=({ product, isHotPrices }
     const current = JSON.stringify(currentProduct);
     localStorage.setItem("current", current);
   }, [currentProduct]);
+
+useEffect(() => {
+      const favorite = JSON.stringify(favoriteProduct);
+      localStorage.setItem("favorite", favorite);
+  }, [favoriteProduct]);
+
+useEffect(() => {
+      const cart = JSON.stringify(cartProducts);
+      localStorage.setItem("cart", cart);
+  }, [cartProducts]);
 
   const onClickFavoriteProduct = (product:Product) => {
     if (!favoriteProduct.find((el:Product) => el.id === product.id)) {
@@ -92,15 +102,15 @@ const CarouselProducts:React.FC<CarouselProductsProps>=({ product, isHotPrices }
       </div>
       <div className={css.buttons}>
         <button
-          disabled={!!cartProduct.find((el) => el.id === product.id)}
+          disabled={!!cartProducts.find((el) => el.id === product.id)}
           className={
-            cartProduct.find((el) => el.id === product.id)
+            cartProducts.find((el) => el.id === product.id)
               ? css.active_cart
               : css.add_cart
           }
           onClick={() => onClickCartProduct(product)}
         >
-          {!cartProduct.find((el) => el.id === product.id)
+          {!cartProducts.find((el) => el.id === product.id)
             ? "Add to cart"
             : "Added"}
         </button>

@@ -8,14 +8,14 @@ export type ProductWithCount = Product &{
 
 interface ShopSliceState{
    favoriteProducts :Product[];
-   cartProducts :ProductWithCount[]
+   cartProducts :ProductWithCount[];
    currentLink :number|null;
    currentProduct :Product;
 }
 
  const initialState:ShopSliceState = {
-    favoriteProducts : JSON.parse(localStorage.getItem('favorite')||'[]'),
-    cartProducts : JSON.parse(localStorage.getItem('cart')||'[]'),
+    favoriteProducts : JSON.parse(localStorage.getItem('favorite') || '[]'),
+    cartProducts : JSON.parse(localStorage.getItem('cart') || '[]'),
     currentLink : 0,
     currentProduct : JSON.parse(localStorage.getItem('current') || 'null'),
 };
